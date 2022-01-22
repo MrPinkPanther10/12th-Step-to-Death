@@ -1,20 +1,22 @@
 // Required Modules
-const db = require('./db/connection');
+const mysql = require('mysql');
 const express = require('express');
+const inquirer = require('inquirer');
 const cTable = require('console.table');
-const { allowedNodeEnvironmentFlags } = require('process');
 
-// Create server application at port 3001
-const PORT = process.env.PORT || 3001;
-const app = express();
+const db = mysql.createConnection({
+    host: 'localhost',
+    // Change it to your MySQL username
+    user: 'root',
+    // Change it to your MySQL password
+    password: '',
+    database: 'employee_list'
+});
 
 // Start server after DB connection
 db.connect(err => {
     if (err) throw err;
-    console.log('Database connected.');
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
+    trackerOptions();
 });
 
 
@@ -59,4 +61,35 @@ function trackerOptions() {
                 break;
         }
     })
-}
+};
+
+// View all departments
+function viewDepartment() {
+    var query = 'SELECT * FROM department';
+    db.query(query, function(err, res) {
+        if (err) throw err;
+        console.table('All Departments:', res);
+        trackerOptions();
+    })
+};
+
+// View all roles
+function viewRoles() {
+    var query = 'SELECT * FROM role';
+    db.query(query, function(err, res) {
+        if (err) throw err;
+        console.table('All Roles:', res);
+        trackerOptions();
+    })
+};
+
+// View all employees
+function viewEmployees() {
+    var query = 'SELECT * FROM employee';
+    db.query(query, function(err, res) {
+        if (err) throw err;
+        console.log(res.length + ' employees found!');
+        console.table('All Employees:', res);
+        trackerOptions();
+    })
+};
