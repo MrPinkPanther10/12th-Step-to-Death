@@ -22,6 +22,12 @@ This project is called Content Management System(CMS) to create interfaces that 
 
 ## Usage 
 Once installation part is done, start the application using "npm start"
+Here is the link for the video:
+https://watch.screencastify.com/v/6KUaYVKjPzYtJqAat8YO
+![Employee Tracker](https://user-images.githubusercontent.com/90013822/150699130-c6baaba3-4e72-4991-af3c-c71cf0a65149.gif)
+
+
+
 
 
 ## License 
